@@ -27,3 +27,9 @@ Please don't spend more than __2 hours__ on this task (not including initial dow
 
 
 
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+Please let me know if you wish for me to talk about my changes and how I solved these problems.
+--------------------------------------------------
+Chalston 
