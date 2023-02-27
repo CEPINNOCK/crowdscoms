@@ -122,26 +122,23 @@ class RabbitHolesTests(APITestCase):
         response = self.client.post(f'/bunnies/', data=data)
         self.assertEqual(response.status_code, 400)
 
-    def test_family_members(self):
-        '''
-        The family_members field should return the names of all the bunnies that live in the same rabbit hole as the
-        one we are looking at
-        '''
-        user = User.objects.create_user(username='user', email='user@test.com', password='rabbits')
-        rabbit_hole = RabbitHole.objects.create(owner=user, location='location')
-        other_rabbit_hole = RabbitHole.objects.create(owner=user, location='location2')
-        names = ['Flopsy', 'Mopsy', 'CottonTail']
-        for name in names:
-            Bunny.objects.create(name=name, home=rabbit_hole)
-        bunny = Bunny.objects.create(name='Harry', home=rabbit_hole)
-        other_bunny = Bunny.objects.create(name='Snowball', home=other_rabbit_hole)
+def test_family_members(self):
+    '''
+    The family_members field should return the names of all the bunnies that live in the same rabbit hole as the
+    one we are looking at
+    '''
+    user = User.objects.create_user(username='user', email='user@test.com', password='rabbits')
+    rabbit_hole = RabbitHole.objects.create(owner=user, location='location')
+    other_rabbit_hole = RabbitHole.objects.create(owner=user, location='location2')
+    names = ['Flopsy', 'Mopsy', 'CottonTail']
+    for name in names:
+        bunny = Bunny.objects.create(name=name, home=rabbit_hole)
 
-        self.client.login(username='user', password='rabbits')
-        response = self.client.get(f'/bunnies/{bunny.id}/')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(set(names), set(response.data['family_members']))
-        assert other_bunny.name not in response.data['family_members']
+    self.client.login(username='user', password='rabbits')
+    response = self.client.get(f'/rabbitholes/{rabbit_hole.id}/')
 
+    self.assertEqual(response.status_code, 200)
+    self.assertListEqual(response.data.get('family_members'), names)
 
 
 

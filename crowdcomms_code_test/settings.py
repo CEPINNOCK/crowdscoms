@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'bunnies.apps.BunniesConfig',
     'analytics.apps.AnalyticsConfig',
     'rest_framework',
+    
 ]
 
 MIDDLEWARE = [
