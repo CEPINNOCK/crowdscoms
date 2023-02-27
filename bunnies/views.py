@@ -9,7 +9,7 @@ from bunnies.serializers import BunnySerializer, RabbitHoleSerializer
 
 class RabbitHoleViewSet(viewsets.ModelViewSet):
     """
-    A viewset for viewing and editing rabbit holes instances.
+    Class base view for viewing and editing rabbit holes instances.
     """
     serializer_class = RabbitHoleSerializer
     permission_classes = (IsAuthenticated, RabbitHolePermissions)
